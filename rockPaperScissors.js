@@ -7,25 +7,53 @@ function getComputerChoice(){
 function playRound(playerChoice, computerChoice){
     playerChoice = playerChoice.toLowerCase();
     if (playerChoice == computerChoice) {
-        return "Draw. Play again!";
+        console.log("Draw round.");
+        return -1;
     } else {
         if(playerChoice == "rock" && computerChoice == "paper"){
-            return "You Lose! Paper beats Rock";
+            console.log("You Lose! Paper beats Rock");
+            return 0;
         } else if(playerChoice == "rock" && computerChoice == "scissors"){
-            return "You win! rock beats scissors";
+            console.log("You win! rock beats scissors");
+            return 1;
         } else if(playerChoice == "paper" && computerChoice == "scissors"){
-            return "You lose! Scissors beats Paper";
+            console.log("You lose! Scissors beats Paper");
+            return 0;
         } else if(playerChoice == "paper" && computerChoice == "rock"){
-            return "You won! Paper beats Rock";    
+            console.log("You won! Paper beats Rock");
+            return 1;    
         } else if(playerChoice == "scissors" && computerChoice == "paper"){
-            return "You won! Scissors beats Paper";
+            console.log("You won! Scissors beats Paper");
+            return 1;
         } else if(playerChoice == "scissors" && computerChoice == "rock"){
-            return "You lose! rock beats scissors";
+            console.log("You lose! rock beats scissors");
+            return 0;
         }
     }
 }
 
-const computerChoice = getComputerChoice();
-const playerChoice = 'rock';
-const result = playRound(playerChoice, computerChoice);
-console.log(result);
+function game(){
+    
+    
+    let playerWinCount = 0; 
+    let computerWinCount = 0;
+    for(let i = 0; i < 5; i++){
+        const computerChoice = getComputerChoice();
+        const playerChoice = 'rock';
+        const result = playRound(playerChoice, computerChoice);
+        if(result == 1){
+            playerWinCount++;
+        } else if(result == 0){
+            computerWinCount++;
+        }
+    }
+    if(playerWinCount === computerWinCount){
+        console.log("Draw! play again");
+    } else if(playerWinCount > computerWinCount){
+        console.log("You won! Congratulations");
+    } else{
+        console.log("You lose! Sorry");
+    }
+}
+
+game();
