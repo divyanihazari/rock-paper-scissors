@@ -1,5 +1,4 @@
 function getComputerChoice(){
-    const choices = ['rock', 'paper', 'scissors'];  
     var randomIndex = Math.floor(Math.random() * 3);
     return choices[randomIndex];
 }
@@ -32,20 +31,36 @@ function playRound(playerChoice, computerChoice){
     }
 }
 
+function isValid(playerChoice) {
+    playerChoice = playerChoice.toLowerCase();
+    if(choices.includes(playerChoice)){
+        return true;
+    } else if(playerChoice == 'null'){
+        return false;
+    }
+}
+
 function game(){
-    
-    
-    let playerWinCount = 0; 
+    let playerWinCount = 0;
     let computerWinCount = 0;
     for(let i = 0; i < 5; i++){
         const computerChoice = getComputerChoice();
-        const playerChoice = 'rock';
-        const result = playRound(playerChoice, computerChoice);
-        if(result == 1){
-            playerWinCount++;
-        } else if(result == 0){
-            computerWinCount++;
+        const playerChoice = prompt('Enter your Choice');
+        const isPlayerChoiceValid = isValid(playerChoice);
+        if (isPlayerChoiceValid) {
+            const result = playRound(playerChoice, computerChoice);
+            if(result == 1){
+                playerWinCount++;
+            } else if(result == 0){
+                computerWinCount++;
+            } else {
+                i--;
+            }
+        } else {
+            alert("Enter either 'Rock', 'Paper' or 'Scissors'");
+            i--; 
         }
+        
     }
     if(playerWinCount === computerWinCount){
         console.log("Draw! play again");
@@ -56,4 +71,5 @@ function game(){
     }
 }
 
+const choices = ['rock', 'paper', 'scissors']; 
 game();
