@@ -47,6 +47,7 @@ for (let i = 0; i < choices.length; i++) {
     const btn = document.createElement('button');
     btn.textContent = currentBtn;
     btn.addEventListener('click', (element) => {
+        winnerLabel.textContent = " ";
         const result = playRound(element);
         if (result == 1) {
             playerScore++;
@@ -57,8 +58,12 @@ for (let i = 0; i < choices.length; i++) {
         computerScoreLabel.textContent = "computer's score : " + computerScore;
         if (playerScore == 5) {
             winnerLabel.textContent = "You Win!";
+            playerScore = 0;
+            computerScore = 0;
         } else if (computerScore == 5) {
-            winnerLabel.textContent = "computer Win!";
+            winnerLabel.textContent = "Computer Win!";
+            playerScore = 0;
+            computerScore = 0;
         }
     });
     container.appendChild(btn);
